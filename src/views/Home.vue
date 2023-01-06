@@ -103,8 +103,8 @@
               <template v-else v-focus="editing">
                 <v-text-field
                   :value="todo.text"
-                  @blur="doneEdit"
-                  @keyup.enter="doneEdit"
+                  @blur="doneEdit($event,todo)"
+                  @keyup.enter="doneEdit($event,todo)"
                   @keyup.esc="cancelEdit"
                   clearable
                   color="primary"
@@ -188,6 +188,7 @@ export default {
   },
   computed: {
     todos () {
+      console.log('El this.$store.state.todos: ', this.$store.state.todos)
       return this.$store.state.todos
     },
     allChecked () {
@@ -220,27 +221,24 @@ export default {
       'removeTodo',
       'toggleTodo'
     ]),
-    addTodo () {
+
+    addTodo: function() {
       var text = this.newTodo.trim()
       if (text) {
         this.$store.dispatch('addTodo', text)
       }
       this.newTodo = ''
     },
-    doneEdit (e) {
-      var value = e.target.value.trim()
-      var todo = this.todo
+    doneEdit: function(event, todo) {
+      var value = event.target.value.trim()
       if (!value) {
         this.removeTodo(todo)
       } else if (this.editing) {
-        this.editTodo({
-          todo,
-          value
-        })
+        this.editTodo({todo,value})
         this.editing = false
       }
     },
-    cancelEdit () {
+    cancelEdit: function() {
       this.editing = false
     }
   },

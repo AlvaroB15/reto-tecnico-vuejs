@@ -28,8 +28,12 @@ const mutations = {
     state.todos.splice(state.todos.indexOf(todo), 1)
   },
   editTodo (state, todo) {
-    const idx = state.todos.map( e => e.id ).indexOf( todo.id )
-    state.todos[idx] = todo
+    const idx = state.todos.findIndex((element) => element.uid === todo.todo.uid)
+    // state.todos[idx] = todo
+    state.todos[idx] = {
+      ...todo.todo,
+      text: todo.text,
+    }
   }
 }
 
@@ -48,6 +52,8 @@ const actions = {
     store.commit('editTodo', { todo, done: !todo.done, text:todo.text })
   },
   editTodo (store, data) {
+    console.log('actions editTodo')
+    console.log(data)
     store.commit('editTodo', { todo: data.todo, text: data.value })
   },
   toggleAll (store, done) {
