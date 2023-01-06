@@ -98,21 +98,22 @@
                   </v-btn>
                 </v-list-tile-action>
               </template>
-              <v-text-field
-                :value="todo.text"
-                @blur="doneEdit"
-                @keyup.enter="doneEdit"
-                @keyup.esc="cancelEdit"
-                clearable
-                color="primary"
-                flat
-                hide-details
-                maxlength="1023"
-                ref="input"
-                solo
-                v-else
-                v-focus="editing"
-              ></v-text-field>
+
+              <template v-else v-focus="editing">
+                <v-text-field
+                  :value="todo.text"
+                  @blur="doneEdit"
+                  @keyup.enter="doneEdit"
+                  @keyup.esc="cancelEdit"
+                  clearable
+                  color="primary"
+                  flat
+                  hide-details
+                  maxlength="1023"
+                  ref="input"
+                  solo
+                ></v-text-field>
+              </template>
             </v-list-tile>
           </template>
         </v-list>
