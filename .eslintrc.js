@@ -9,7 +9,16 @@ module.exports = {
 		'plugin:vue/vue3-essential'
 	],
 	'overrides': [
-	],
+		{
+		  "files": [
+			"**/__tests__/*.{j,t}s?(x)",
+			"**/tests/unit/**/*.spec.{j,t}s?(x)"
+		  ],
+		  "env": {
+			"jest": true
+		  }
+		}
+	  ],
 	'parserOptions': {
 		'ecmaVersion': 'latest',
 		'sourceType': 'module'
