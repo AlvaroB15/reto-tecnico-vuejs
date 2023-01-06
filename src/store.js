@@ -45,7 +45,7 @@ const actions = {
     store.commit('removeTodo', todo)
   },
   toggleTodo (store, todo) {
-    store.commit('editTodo', { todo, done: !!!todo.done, text:todo.text })
+    store.commit('editTodo', { todo, done: !todo.done, text:todo.text })
   },
   editTodo (store, data) {
     store.commit('editTodo', { todo: data.todo, text: data.value })

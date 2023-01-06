@@ -19,6 +19,7 @@
                 v-else
               >check</v-icon>
             </v-list-tile-action>
+            
             <v-text-field
               :label="'New todo input'"
               @keydown.enter="addTodo"
@@ -147,7 +148,7 @@ var filters = {
   active: function (todos) {
     return todos.filter(function (todo) {
       console.log('INGRESÓ A ACTIVE')
-      return !!!todo.done
+      return !todo.done
     })
   },
   completed: function (todos) {
@@ -198,7 +199,7 @@ export default {
     remaining () {
       
       console.log({
-        "A":this.todos
+        'A':this.todos
       })
       
       
@@ -229,7 +230,7 @@ export default {
     doneEdit (e) {
       var value = e.target.value.trim()
       var todo = this.todo
-      if (!!!value) {
+      if (!value) {
         this.removeTodo(todo)
       } else if (this.editing) {
         this.editTodo({
