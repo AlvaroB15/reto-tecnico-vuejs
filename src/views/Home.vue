@@ -74,7 +74,7 @@
                   :input-value="todo.done"
                   @change="toggleTodo(todo)"
                   color="primary"
-                  v-if="!!!editing"
+                  v-if="!editing"
                 ></v-checkbox>
                 <v-icon
                   color="primary"
@@ -147,7 +147,6 @@ var filters = {
   },
   active: function (todos) {
     return todos.filter(function (todo) {
-      console.log('INGRESÓ A ACTIVE')
       return !todo.done
     })
   },
@@ -159,7 +158,6 @@ var filters = {
 }
 
 function filterFunction (n, w) {
-  console.log('holaaa')
   if (n === 1) {
     return w
   } else {
@@ -188,7 +186,6 @@ export default {
   },
   computed: {
     todos () {
-      console.log('El this.$store.state.todos: ', this.$store.state.todos)
       return this.$store.state.todos
     },
     allChecked () {
@@ -198,15 +195,8 @@ export default {
       return filters[this.visibility](this.todos)
     },
     remaining () {
-      
-      console.log({
-        'A':this.todos
-      })
-      
-      
-        // return this.todos.length != 0 ? this.todos.filter(todo => !todo.done).length : ''
-      
-      
+      return this.todos.length != 0 ? this.todos.filter(todo => !todo.done).length : ''
+
     },
     progressPercentage () {
       var len = this.todos.length
@@ -244,7 +234,6 @@ export default {
   },
   filters: {
     pluralize: function (n, w) {
-      console.log('TODO')
       return filterFunction(n, w)
     },
     capitalize: function (s) {
